@@ -15,20 +15,19 @@
 
 <title>John Doe | Personal Portfolio</title>
 
-<link href="favicon.ico" type="image/gif" rel="icon" />
-<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/css/skins.css"/>
-<link rel="stylesheet" type="text/css" href="/static/css/skin.css" />
+<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/style.css"/>
+<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/skins.css"/>
+<link rel="stylesheet" type="text/css" href="/static/wishCard/css/skin.css" />
 
 <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
 
-<script charset="utf-8" type="text/javascript" src="/static/js/jquery.1.4.2.min.js"></script>
-<script type= "text/javascript" src="/static/js/queryLoader.js" ></script>
-<script type="text/javascript" src="/static/js/jquery.backgroundposition.js"></script>
-<script type="text/javascript" src="/static/js/jquery.smooth-scroll.js"></script>
-<script type="text/javascript" src="/static/js/sp.js"></script>
-<script type="text/javascript" src="/static/js/js.js"></script>
-<script type="text/javascript" src="/static/js/skins.js"></script>
+<script charset="utf-8" type="text/javascript" src="/static/wishCard/js/jquery.1.4.2.min.js"></script>
+<script type= "text/javascript" src="/static/wishCard/js/queryLoader.js" ></script>
+<script type="text/javascript" src="/static/wishCard/js/jquery.backgroundposition.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/jquery.smooth-scroll.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/sp.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/js.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/skins.js"></script>
 
 </head>
 
@@ -127,7 +126,7 @@
     </div><!-- end div #container -->
 </div><!-- end div #wrapper -->
 
-<script type='/static/text/javascript'>
+<script type='/static/wishCard/text/javascript'>
     QueryLoader.init();
 </script>
 

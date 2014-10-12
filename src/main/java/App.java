@@ -80,7 +80,11 @@ public class App {
 				Map<String, Object> viewObjects = new HashMap<String, Object>();
 				viewObjects.put("templateName", "codeResult.ftl");
 				viewObjects.put("userName", userName);
-
+				userName=userName.replaceAll(",", "");
+				int WCID = Integer.parseInt(userName);
+				
+				System.out.println(WCID + " FFF ");
+				o.update(WCID);
 				return modelAndView(viewObjects, "index.ftl");
 			}
 		});
@@ -144,11 +148,15 @@ public class App {
             @Override
             public Object handle(Request request, Response response) {
                 String SWICD = request.params(":id");
-                Integer WCID = Integer.parseInt(SWICD.replaceAll(",", ""));
+//                System.out.println(SWICD);
+                Integer WCID = Integer.parseInt(SWICD.replaceAll("[^0-9]", ""));
                 Item item = o.readOne(WCID);
                 Map<String, Object> viewObjects = new HashMap<String, Object>();
+                
+                String picStr = qrcode.encode(DOMAIN_NAME + "/update/" + SWICD);
+                
                 viewObjects.put("record",item);
-
+                viewObjects.put("codepic",picStr);
                 return modelAndView(viewObjects,"printResult.ftl");
             }
         });
