@@ -64,21 +64,7 @@ public class App
 
             
         });
-//        post(new Route("/") {
-//            @Override
-//            public Object handle(Request request, Response response) {
-//                Integer id      = Integer.parseInt(request.queryParams("article-id"));
-//                String title    = request.queryParams("article-title");
-//                String summary  = request.queryParams("article-summary");
-//                String content  = request.queryParams("article-content");
-//
-////                articleDbService.update(id, title, summary, content);
-//
-//                response.status(200);
-//                response.redirect("/");
-//                return "";
-//            }
-//        });
+        
         post(new Route("/update") {
             @Override
             public Object handle(Request request, Response response) {
@@ -130,6 +116,7 @@ public class App
                 Integer WCID = Integer.parseInt(SWICD.replaceAll(",", ""));
                 Item item = o.readOne(WCID);
                 Map<String, Object> viewObjects = new HashMap<String, Object>();
+                
                 viewObjects.put("record",item);
                 
                 return modelAndView(viewObjects,"printResult.ftl");
