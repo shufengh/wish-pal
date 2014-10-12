@@ -29,7 +29,6 @@ public class ModifyData {
             conn = DriverManager.getConnection(uri, user, passwd);
 //            stmt = conn.createStatement();
          
- 
             System.out.println("Connecting to MySQL database");
         } catch(Exception e) {
             System.out.println(e.getMessage());
