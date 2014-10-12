@@ -13,22 +13,21 @@
 <meta name="author" content="Mihai Balea"/>
 <meta http-equiv="Reply-to" content="contact@mihaibalea.info"/>
 
-<title>John Doe | Personal Portfolio</title>
+<title>Wish Card</title>
 
-<link href="favicon.ico" type="image/gif" rel="icon" />
-<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/css/skins.css"/>
-<link rel="stylesheet" type="text/css" href="/static/css/skin.css" />
+<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/style.css"/>
+<link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/skins.css"/>
+<link rel="stylesheet" type="text/css" href="/static/wishCard/css/skin.css" />
 
 <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
 
-<script charset="utf-8" type="text/javascript" src="/static/js/jquery.1.4.2.min.js"></script>
-<script type= "text/javascript" src="/static/js/queryLoader.js" ></script>
-<script type="text/javascript" src="/static/js/jquery.backgroundposition.js"></script>
-<script type="text/javascript" src="/static/js/jquery.smooth-scroll.js"></script>
-<script type="text/javascript" src="/static/js/sp.js"></script>
-<script type="text/javascript" src="/static/js/js.js"></script>
-<script type="text/javascript" src="/static/js/skins.js"></script>
+<script charset="utf-8" type="text/javascript" src="/static/wishCard/js/jquery.1.4.2.min.js"></script>
+<script type= "text/javascript" src="/static/wishCard/js/queryLoader.js" ></script>
+<script type="text/javascript" src="/static/wishCard/js/jquery.backgroundposition.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/jquery.smooth-scroll.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/sp.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/js.js"></script>
+<script type="text/javascript" src="/static/wishCard/js/skins.js"></script>
 
 </head>
 
@@ -62,17 +61,6 @@
 
 <!------------------------- NAVIGATION -->
 
-    <div id="navbarHolder">
-        <div id="navbar">
-            <ul>
-
-                <li><a id="nav_about" href="#about">ABOUT<span class="m_w">ABOUT</span><span class="m_r">ABOUT</span></a></li>
-                <li><a id="nav_work" href="#work">WORK<span class="m_w">WORK</span><span class="m_r">WORK</span></a></li>
-                <li><a id="nav_projects" href="#projects">Projects<span class="m_w">Projects</span><span class="m_r">Projects</span></a></li>
-                <li><a id="nav_contact" href="#contact">Contact<span class="m_w">Contact</span><span class="m_r">Contact</span></a></li>
-            </ul>
-        </div>
-    </div><!-- end div #navbarHolder -->
 
 <!------------------------- CONTENT -->
 
@@ -84,7 +72,7 @@
 <!------------------------- ABOUT -->
 
         <div id="about">
-            <a id="logo_big" title="John Doe" href="index.html"></a>
+            <a id="logo_big" title="" href="#"></a>
             <div id="headline" class="left grid">
                 <h1>${record.getFirstName()}</h1><br />
                 <h2><span>Age: ${record.getCardAge()}</span></h2><br />
@@ -127,7 +115,7 @@
     </div><!-- end div #container -->
 </div><!-- end div #wrapper -->
 
-<script type='/static/text/javascript'>
+<script type='/static/wishCard/text/javascript'>
     QueryLoader.init();
 </script>
 

@@ -1,5 +1,4 @@
 <div>
-	<h1> Thanks, Gift ${userName} has been received</h1>
-	<img src="${pidAddr}"/>
-	
+	<h2> Thanks so much. ${userName} will like it</h2>
+	<img src="${picAddr}"/>
 </div>
