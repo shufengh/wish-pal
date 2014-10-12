@@ -1,12 +1,17 @@
-package com.wishpal.donate;
+package com.wishpal.util;
 
-import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+
+import sun.misc.BASE64Encoder;
+import sun.misc.BASE64Decoder;
+
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -37,23 +42,46 @@ public class QRCode {
 		this.qrCodewidth = width;
 	}
 	
-	public void encode(String qrCodeData, String filePath) {
+	public String encode(String qrCodeData) {
 
 		try {
 			BitMatrix matrix = new MultiFormatWriter().encode(new String(
 					qrCodeData.getBytes(Config.CHARSET), Config.CHARSET),
 					BarcodeFormat.QR_CODE, qrCodewidth, qrCodeheight, hintMap);
 
-			MatrixToImageWriter.writeToFile(matrix,
-					filePath.substring(filePath.lastIndexOf('.') + 1),
-					new File(filePath));
+//			MatrixToImageWriter.writeToFile(matrix,
+//					filePath.substring(filePath.lastIndexOf('.') + 1),
+//					new File(filePath));
 			
-			System.out.println("create qrcode in " + filePath);
+			String prefix = "data:image/png;base64,";
+			return prefix + encodeToString(MatrixToImageWriter.toBufferedImage(matrix), "png");
+			
 		} catch (WriterException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		
+		return "";
+	}
+	//https://github.com/benbai123/JSP_Servlet_Practice/blob/master/Practice
+	// /JAVA/Commons/src/test/ImageUtils.java
+	public static String encodeToString(BufferedImage image, String type) {
+		String imageString = null;
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+		try {
+			ImageIO.write(image, type, bos);
+			byte[] imageBytes = bos.toByteArray();
+
+			BASE64Encoder encoder = new BASE64Encoder();
+			imageString = encoder.encode(imageBytes);
+
+			bos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return imageString;
 	}
 
 	public String decode(String filePath) {

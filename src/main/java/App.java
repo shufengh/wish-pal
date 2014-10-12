@@ -1,27 +1,24 @@
-package com.wishpal.donate;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
 
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
 import static spark.Spark.setPort;
 import static spark.Spark.staticFileLocation;
+import spark.template.freemarker.FreeMarkerRoute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.impl.SimpleLogger;
 
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
-//<<<<<<< HEAD
-import spark.template.freemarker.FreeMarkerRoute;
+import com.wishpal.donate.*;
+import com.wishpal.util.*;
 
 public class App {
 	public static String DOMAIN_NAME;
@@ -36,17 +33,14 @@ public class App {
 
 		String domainName = System.getenv("DOMAIN_NAME");
 		if (domainName == null) DOMAIN_NAME = "http://wishpal.herokuapp.com";
-		else DOMAIN_NAME = "127.0.0.1:4567";
-
-
+		else DOMAIN_NAME = "http://127.0.0.1:4567";
 	}
+	
 	public static void main(String[] args) {
 		setUp();
+
 		final ModifyData o = new ModifyData();
-
 		final QRCode qrcode = new QRCode();
-
-
 
 		get(new FreeMarkerRoute("/") {
 			@Override
@@ -68,13 +62,11 @@ public class App {
 				if (name == null || name == "") name = "Amigo";
 
 				String codeData = DOMAIN_NAME + "/update/" + name;
-				String imgPath = Config.PUBLIC + "/image/" + name + ".png";
 
-				qrcode.encode(codeData, imgPath);
 
 				Map<String, Object> viewObjects = new HashMap<String, Object>();
 				viewObjects.put("templateName", "wishItem.ftl");
-				viewObjects.put("imgPath", "image/" + name + ".png");
+				viewObjects.put("imgPath", qrcode.encode(codeData));
 
 				return modelAndView(viewObjects, "index.ftl");
 			}

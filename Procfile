@@ -1,1 +1,1 @@
-web: java -cp target/classes:"target/dependency/*" com.wishpal.App
+web: java -cp target/classes:"target/dependency/*" App
