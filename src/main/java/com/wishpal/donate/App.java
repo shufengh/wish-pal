@@ -23,7 +23,7 @@ public class App {
 		if (portStr != null) setPort(Integer.parseInt(portStr));
 		
 		String domainName = System.getenv("DOMAIN_NAME");
-		if (domainName == null) DOMAIN_NAME = "http://wishpal.heroku.com";
+		if (domainName == null) DOMAIN_NAME = "http://wishpal.herokuapp.com";
 		else DOMAIN_NAME = "127.0.0.1:4567";
 
 
