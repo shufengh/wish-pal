@@ -7,13 +7,13 @@
         <title>Board_Picture</title>
 
         <!-- add styles -->
-        <link href="css/main.css" rel="stylesheet" type="text/css" />
-		<link href="css/colorbox.css" rel="stylesheet" type="text/css" />
+        <link href="/static/css/main.css" rel="stylesheet" type="text/css" />
+		<link href="/static/css/colorbox.css" rel="stylesheet" type="text/css" />
         <!-- add scripts -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery.masonry.min.js"></script>
-		<script src="js/jquery.colorbox-min.js"></script>
-        <script src="js/script.js"></script>
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/jquery.masonry.min.js"></script>
+		<script src="/static/js/jquery.colorbox-min.js"></script>
+        <script src="/static/js/script.js"></script>
     </head>
     <body>
 	
@@ -25,44 +25,27 @@
         </script>
 
         <!-- header panel -->
-        <div class="header_panel">
+        
+<form method='POST' action="/read">
 
-            <!-- logo -->
-            <a href="index.php" class="logo"></a>
+			gender: <select name = "gender">
+						<option value ="all">all</option>
+  						<option value ="boy">boy</option>
+  						<option value ="girl">girl</option>
+					</select>
+			gift: <input type = "text" name = gift>
+					<select name = "searchFilter">
+  						<option value =0>Pending</option>
+  						<option value =1>Done</option>
+					</select>
+				  <input type = "submit">
+       
+</form>
 
-            <!-- search form -->
-            <form action="" method="get" class="search"> <!--action for the search result page-->
-                <input autocomplete="off" name="q" size="27" placeholder="Search" type="text" />
-                <input name="search" type="submit" />
-            </form>
 
-            <!-- navigation menu -->
-            <ul class="nav">
-                
-                <li>
-                    <a href="#">Add<span></span></a>
-                    <ul>
-                        <li><a class="gallery" href="web.php">From Website</a></li>
-                        <li><a class="gallery" href="local.php">Upload</a></li>
-                        
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Profile<span></span></a>
-                    <ul>
-                        <li><a href="#">Invite Friends</a></li>
-                        <li><a href="friend.php">Find Friends</a></li>
-                        <li class="div"><a href="board.php">Boards</a></li>
-                        <li><a href="showpin.php">Pins</a></li>
-                        <li><a href="showlike.php">Likes</a></li>
-                        <li class="div"><a href="#">Settings</a></li>
-                        <li><a href="logout.php">Logout</a></li>
-                    </ul>
-                </li>
-                
-            </ul>
+           
 
-        </div>
+        
 
 			
 		
@@ -73,32 +56,25 @@
         <div class="main_container">
 			
 		<#list records as record>
-			<tr>
- 				<td>${record.getWishCardID()}</td>
-  				<td><a href="/print/${record.getWishCardID()}">${record.getFirstName()}</a></td>
-  				<td>${record.getCardGender()}</td>
-  				<td>${record.getCardAge()}</td>
-  				<td>${record.getPreamble()}</td>
-  				<td>${record.getGiftDescription() }</td>
-  				<td>${record.getGift2Description() }</td>
-     		</tr>
+			
 		<div class="pin">
+		
+			<p>
+				<font size="3" face="Verdana"> ${record.getFirstName()}</font>
+			</p>
+			
 			<div class="holder">
 				<div class="actions" pic_id="1">
-					
-					<p>
-						<font size="3" face="Verdana"> ${record.getFirstName()}</font>
-					</p>
 
 				</div> <!-- user name -->
-				<a class="image" href="/card/index copy.html">
+				<a target="_blank" class="image" href="/print/${record.getWishCardID()}">
 				<!--
                 <img src="{$local}" />
 				-->
-				<img src = http://localhost:8888/wishcard/picture/QRCode.png
+				<img  src = "${record.getPicAddress()}"></img>
 				</a>
 		    </div>
-		    <p class="desc">{record.getGiftDescription() },${record.getGift2Description() }</p> <!-- wish -->
+		    <p class="desc">${record.getGiftDescription() },${record.getGift2Description() }</p> <!-- wish -->
 
         </div>
 

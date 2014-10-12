@@ -13,7 +13,7 @@
 <meta name="author" content="Mihai Balea"/>
 <meta http-equiv="Reply-to" content="contact@mihaibalea.info"/>
 
-<title>John Doe | Personal Portfolio</title>
+<title>Wish Card</title>
 
 <link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/style.css"/>
 <link id="mainCSS" rel="stylesheet" type="text/css" href="/static/wishCard/css/skins.css"/>
@@ -61,17 +61,6 @@
 
 <!------------------------- NAVIGATION -->
 
-    <div id="navbarHolder">
-        <div id="navbar">
-            <ul>
-
-                <li><a id="nav_about" href="#about">ABOUT<span class="m_w">ABOUT</span><span class="m_r">ABOUT</span></a></li>
-                <li><a id="nav_work" href="#work">WORK<span class="m_w">WORK</span><span class="m_r">WORK</span></a></li>
-                <li><a id="nav_projects" href="#projects">Projects<span class="m_w">Projects</span><span class="m_r">Projects</span></a></li>
-                <li><a id="nav_contact" href="#contact">Contact<span class="m_w">Contact</span><span class="m_r">Contact</span></a></li>
-            </ul>
-        </div>
-    </div><!-- end div #navbarHolder -->
 
 <!------------------------- CONTENT -->
 
@@ -83,7 +72,7 @@
 <!------------------------- ABOUT -->
 
         <div id="about">
-            <a id="logo_big" title="John Doe" href="index.html"></a>
+            <a id="logo_big" title="" href="#"></a>
             <div id="headline" class="left grid">
                 <h1>${record.getFirstName()}</h1><br />
                 <h2><span>Age: ${record.getCardAge()}</span></h2><br />

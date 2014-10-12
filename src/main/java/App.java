@@ -33,7 +33,8 @@ public class App {
 
 		String domainName = System.getenv("DOMAIN_NAME");
 		if (domainName == null) DOMAIN_NAME = "http://wishpal.herokuapp.com";
-		else DOMAIN_NAME = "http://127.0.0.1:4567";
+		//else DOMAIN_NAME = "http://127.0.0.1:4567";
+		else DOMAIN_NAME = "http://192.168.86.243:4567";
 	}
 	
 	public static void main(String[] args) {
@@ -45,11 +46,22 @@ public class App {
 		get(new FreeMarkerRoute("/") {
 			@Override
 			public Object handle(Request request, Response response) {
-				Map<String, Object> viewObjects = new HashMap<String, Object>();
-				viewObjects.put("templateName", "wishItem.ftl");
-				viewObjects.put("imgPath", "");
+//				Map<String, Object> viewObjects = new HashMap<String, Object>();
+//				viewObjects.put("templateName", "wishItem.ftl");
+//				viewObjects.put("imgPath", "");
+//
+//				return modelAndView(viewObjects, "index.ftl");
+				 List<Item> itemList = new ArrayList<Item>();
+	                itemList = o.readAll(0);
+//	              
+	                Map<String, Object> viewObjects = new HashMap<String, Object>();
 
-				return modelAndView(viewObjects, "index.ftl");
+	                viewObjects.put("records", itemList);
+	                
+	                
+
+
+	                return modelAndView(viewObjects, "board_pic.ftl");
 			}
 		});
 
@@ -77,14 +89,19 @@ public class App {
 			public Object handle(Request req, Response resp) {
 				String userName = req.params(":name");
 				if (userName == null) userName = "Amigo";
-				Map<String, Object> viewObjects = new HashMap<String, Object>();
-				viewObjects.put("templateName", "codeResult.ftl");
-				viewObjects.put("userName", userName);
 				userName=userName.replaceAll(",", "");
 				int WCID = Integer.parseInt(userName);
 				
 				System.out.println(WCID + " FFF ");
 				o.update(WCID);
+				Item record = o.readOne(WCID);
+
+				Map<String, Object> viewObjects = new HashMap<String, Object>();
+				viewObjects.put("templateName", "codeResult.ftl");
+				viewObjects.put("userName", record.getFirstName());
+				
+				
+				viewObjects.put("picAddr", record.getPicAddress());
 				return modelAndView(viewObjects, "index.ftl");
 			}
 		});
@@ -123,24 +140,15 @@ public class App {
                 }
                 List<Item> itemList = new ArrayList<Item>();
                 itemList = o.readAll2(id,gender,gift);
-//              StringBuilder sb = new StringBuilder();
-                for(Item i:itemList){
-//                  sb.append("WishCardID: "+ i.WishCardID);
-//                  sb.append(" AgencyCode: "+i.AgencyCode);
-//                  sb.append(" AgencyZone: "+ i.AgencyZone);
-//                  sb.append(System.getProperty("line.separator"));
-                }
-//                Integer id = Integer.parseInt(request.params(":id"));
-//              ArrayList<Integer> test = new ArrayList<Integer>();
-//              test.add(1);
-//              test.add(2);
+//              
                 Map<String, Object> viewObjects = new HashMap<String, Object>();
 
                 viewObjects.put("records", itemList);
+                
+                
 
 
-
-                return modelAndView(viewObjects, "searchResult.ftl");
+                return modelAndView(viewObjects, "board_pic.ftl");
             }
         });
 

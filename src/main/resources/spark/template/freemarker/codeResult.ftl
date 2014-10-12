@@ -1,5 +1,5 @@
 <div>
-	<h2> Welcome ${userName} from barcode </h2>
-	<img src="/static/images/kids/0.jpg" height="240px"/>
+	<h2> Thanks so much. ${userName} will like it</h2>
+	<img src="${picAddr}"/>
 	
 </div>

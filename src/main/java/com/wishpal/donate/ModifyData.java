@@ -74,6 +74,8 @@ public class ModifyData {
                         resultSet.getString("GiftDescription"),
                         resultSet.getString("Gift2Description")
                 		);
+                int picID = entity.WishCardID%16;
+                entity.setPicAddress("/static/images/kids/"+picID+".jpg");
                 result.add(entity);
                 }
  
@@ -107,12 +109,16 @@ public class ModifyData {
         		String gift = giftDes.toLowerCase();
         		giftSQL = " and (GiftDescription like \'%"+gift+"%\' or Gift2Description like \'%"+gift+"%\' )";
         	}
+        	String genderSQL = "";
+        	if(!gender.equals("all")){
+        		genderSQL = " and CardGender = "+"\'" + gender + "\'" ;
+        	}
         	
-            String selectQuery = "SELECT * FROM Wish where Status = ? and CardGender = ?"+giftSQL;
+            String selectQuery = "SELECT * FROM Wish where Status = ?"+ genderSQL + giftSQL;
  
             PreparedStatement pstmt = conn.prepareStatement(selectQuery);
             pstmt.setInt(1, id);
-            pstmt.setString(2, gender);
+//            pstmt.setString(2, gender);
  
             pstmt.executeQuery();
  
@@ -130,6 +136,9 @@ public class ModifyData {
                         resultSet.getString("GiftDescription"),
                         resultSet.getString("Gift2Description")
                 		);
+                int picID = entity.WishCardID%16;
+                entity.setPicAddress("/static/images/kids/"+picID+".jpg");
+//                entity.setPicAddress("/static/images/kids/"+picID+".jpg");
                 result.add(entity);
                 }
  
@@ -180,7 +189,8 @@ public class ModifyData {
                         resultSet.getString("GiftDescription"),
                         resultSet.getString("Gift2Description")
                 		);
- 
+                int picID = entity.WishCardID%16;
+                entity.setPicAddress("/static/images/kids/"+picID+".jpg");
                 pstmt.close();
  
                 return (Item) entity;

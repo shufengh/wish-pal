@@ -16,6 +16,7 @@ public class Item {
 	public String GiftAttribute1;
 	public String ReceiptNotice;
 	public String Gift2Description;
+	public String picAddress;
 //	public Item(int WCID, String AC, int AZ, int ACID, String FN, String CG){
 //		this.WishCardID = WCID;
 //		this.AgencyCode = AC;
@@ -167,6 +168,14 @@ public class Item {
 
 	public void setGift2Description(String gift2Description) {
 		Gift2Description = gift2Description;
+	}
+
+	public String getPicAddress() {
+		return picAddress;
+	}
+
+	public void setPicAddress(String picAddress) {
+		this.picAddress = picAddress;
 	}
 	
 
