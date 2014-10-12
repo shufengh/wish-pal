@@ -98,9 +98,68 @@ public class ModifyData {
  
         return null;
     }
+    public List<Item> readAll2(int id, String gender, String giftDes) {
+        try {
+        	List<Item> result = new ArrayList<Item>();
+        	String giftSQL = "";
+        	
+        	if(giftDes.length()!=0){
+        		String gift = giftDes.toLowerCase();
+        		giftSQL = " and (GiftDescription like \'%"+gift+"%\' or Gift2Description like \'%"+gift+"%\' )";
+        	}
+        	
+            String selectQuery = "SELECT * FROM Wish where Status = ? and CardGender = ?"+giftSQL;
+ 
+            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setInt(1, id);
+            pstmt.setString(2, gender);
+ 
+            pstmt.executeQuery();
+ 
+            // A ResultSet is Class which represents a table returned by a SQL query
+            ResultSet resultSet = pstmt.getResultSet();
+ 
+            while(resultSet.next()) {
+                Item entity = new Item(
+                        // You must know both the column name and the type to extract the row
+                        resultSet.getInt("WishCard"),
+                        resultSet.getString("FirstName"),
+                        resultSet.getString("CardGender"),
+                        resultSet.getString("CardAge"),
+                        resultSet.getString("Preamble"),
+                        resultSet.getString("GiftDescription"),
+                        resultSet.getString("Gift2Description")
+                		);
+                result.add(entity);
+                }
+ 
+                pstmt.close();
+ 
+                return result;
+         
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+ 
+            try {
+                if(null != stmt) {
+                    stmt.close();
+                }
+                if(null != conn) {
+                    conn.close();
+                }
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
+        }
+ 
+        return null;
+    }
+   
+    
     public Item readOne(int id) {
         try {
-            String selectQuery = "SELECT * FROM Wish where WishCard = ?";
+        	
+            String selectQuery = "SELECT * FROM Wish where WishCard = ? ";
  
             PreparedStatement pstmt = conn.prepareStatement(selectQuery);
             pstmt.setInt(1, id);

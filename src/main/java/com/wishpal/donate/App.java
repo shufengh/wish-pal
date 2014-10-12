@@ -119,13 +119,14 @@ public class App {
             @Override
             public Object handle(Request request, Response response) {
                 String sid = request.queryParams("searchFilter");
+                String gender = request.queryParams("gender");
+                String gift = request.queryParams("gift");
                 int id = 0;
                 if (sid != null){
-
                      id = Integer.parseInt(sid);
                 }
                 List<Item> itemList = new ArrayList<Item>();
-                itemList = o.readAll(id);
+                itemList = o.readAll2(id,gender,gift);
 //              StringBuilder sb = new StringBuilder();
                 for(Item i:itemList){
 //                  sb.append("WishCardID: "+ i.WishCardID);
@@ -154,7 +155,6 @@ public class App {
                 Integer WCID = Integer.parseInt(SWICD.replaceAll(",", ""));
                 Item item = o.readOne(WCID);
                 Map<String, Object> viewObjects = new HashMap<String, Object>();
-
                 viewObjects.put("record",item);
 
                 return modelAndView(viewObjects,"printResult.ftl");
