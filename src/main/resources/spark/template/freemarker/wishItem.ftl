@@ -4,5 +4,5 @@
 		
 		<input type="submit" name="submit" />
 	</form>
-	<img src="${imgPath}" alt="barcode holder" />
+	<img src="${imgPath}" alt="" />
 </div>
