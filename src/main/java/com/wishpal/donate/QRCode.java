@@ -1,20 +1,11 @@
 package com.wishpal.donate;
 
-import static spark.Spark.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.slf4j.impl.SimpleLogger;
-
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.template.freemarker.FreeMarkerRoute;
 
 import javax.imageio.ImageIO;
 
@@ -32,38 +23,24 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+public class QRCode {
 
-public class App {
-    public static void main(String[] args) {
-        System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
+	public static void main(String[] args) throws WriterException, IOException,
+			NotFoundException {
+		String qrCodeData = "piapiapia!";
+		String filePath = "QRCode.png";
+		String charset = "UTF-8"; // or "ISO-8859-1"
+		Map hintMap = new HashMap();
+		hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
-        staticFileLocation("/");
+		createQRCode(qrCodeData, filePath, charset, hintMap, 200, 200);
+		System.out.println("QR Code image created successfully!");
 
-        //Heroku will pass $PORT to the app. The default port is 4567
-        String portStr = System.getenv("PORT");
-        if(portStr != null) setPort(Integer.parseInt(portStr));
+		System.out.println("Data read from QR Code: "
+				+ readQRCode(filePath, charset, hintMap));
 
-    	
-        get(new Route("/") {
-        	@Override
-        	public Object handle(Request req, Response resp) {
-        		return "hello nihao";
-        	}
-        });
-        
-        get(new FreeMarkerRoute("/") {
-            @Override
-            public Object handle(Request request, Response response) {
-                Map<String, Object> viewObjects = new HashMap<String, Object>();
+	}
 
-                viewObjects.put("templateName", "articleForm.ftl");
-
-                return modelAndView(viewObjects, "index.ftl");
-            }
-        });
-
-    }
-    
 	public static void createQRCode(String qrCodeData, String filePath,
 			String charset, Map hintMap, int qrCodeheight, int qrCodewidth)
 			throws WriterException, IOException {
