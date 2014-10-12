@@ -40,7 +40,7 @@ public class App
         	@Override
         	public Object handle(Request req, Response resp) {
         		List<Item> itemList = new ArrayList<Item>();
-        		itemList = o.readOne(1);
+        		itemList = o.readAll(1);
         		StringBuilder sb = new StringBuilder();
         		for(Item i:itemList){
         			sb.append("WishCardID: "+ i.WishCardID);
@@ -101,7 +101,7 @@ public class App
             		 id = Integer.parseInt(sid);
             	}
             	List<Item> itemList = new ArrayList<Item>();
-        		itemList = o.readOne(id);
+        		itemList = o.readAll(id);
 //        		StringBuilder sb = new StringBuilder();
         		for(Item i:itemList){
 //        			sb.append("WishCardID: "+ i.WishCardID);
@@ -110,20 +110,32 @@ public class App
 //        			sb.append(System.getProperty("line.separator"));
         		}
 //                Integer id = Integer.parseInt(request.params(":id"));
-        		ArrayList<Integer> test = new ArrayList<Integer>();
-        		test.add(1);
-        		test.add(2);
+//        		ArrayList<Integer> test = new ArrayList<Integer>();
+//        		test.add(1);
+//        		test.add(2);
                 Map<String, Object> viewObjects = new HashMap<String, Object>();
                 	
                 viewObjects.put("records", itemList);
-                viewObjects.put("pass", "hello");
                 
 
-//                viewObjects.put("article", articleDbService.readOne(id));
 
                 return modelAndView(viewObjects, "searchResult.ftl");
             }
         });
+        
+        get(new FreeMarkerRoute("/print/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+            	String SWICD = request.params(":id");
+                Integer WCID = Integer.parseInt(SWICD.replaceAll(",", ""));
+                Item item = o.readOne(WCID);
+                Map<String, Object> viewObjects = new HashMap<String, Object>();
+                viewObjects.put("record",item);
+                
+                return modelAndView(viewObjects,"printResult.ftl");
+            }
+        });
+        
     }
 
 	

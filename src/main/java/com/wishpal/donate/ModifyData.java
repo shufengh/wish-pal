@@ -50,7 +50,7 @@ public class ModifyData {
     }
     
     
-    public List<Item> readOne(int id) {
+    public List<Item> readAll(int id) {
         try {
         	List<Item> result = new ArrayList<Item>();
             String selectQuery = "SELECT * FROM Wish where Status = ?";
@@ -98,50 +98,54 @@ public class ModifyData {
  
         return null;
     }
-// 
-//    @Override
-//    @SuppressWarnings("unchecked") //Tells the compiler to ignore unchecked type casts
-//    public ArrayList<T> readAll() {
-//        // Type cast the generic T into an Article
-//        ArrayList<Article> results = (ArrayList<Article>) new ArrayList<T>();
-// 
-//        try {
-//            String query = "SELECT * FROM article;";
-// 
-//            stmt.execute(query);
-//            ResultSet resultSet = stmt.getResultSet();
-// 
-//            while(resultSet.next()) {
-//                Article entity = new Article(
-//                        resultSet.getString("title"),
-//                        resultSet.getString("summary"),
-//                        resultSet.getString("content"),
-//                        resultSet.getInt("id"),
-//                        resultSet.getDate("createdat"),
-//                        resultSet.getBoolean("deleted")
-//                );
-// 
-//                results.add(entity);
-//            }
-//        } catch(Exception e) {
-//            System.out.println(e.getMessage());
-// 
-//            try {
-//                if(null != stmt) {
-//                    stmt.close();
-//                }
-//                if(null != conn) {
-//                    conn.close();
-//                }
-//            } catch (SQLException sqlException) {
-//                sqlException.printStackTrace();
-//            }
-//        }
-// 
-//        // The interface ArticleDbService relies upon the generic type T so we cast it back
-//        return (ArrayList<T>) results;
-//    }
-// 
+    public Item readOne(int id) {
+        try {
+            String selectQuery = "SELECT * FROM Wish where WishCard = ?";
+ 
+            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setInt(1, id);
+ 
+            pstmt.executeQuery();
+ 
+            // A ResultSet is Class which represents a table returned by a SQL query
+            ResultSet resultSet = pstmt.getResultSet();
+ 
+            if(resultSet.next()) {
+            	Item entity = new Item(
+                        // You must know both the column name and the type to extract the row
+                        resultSet.getInt("WishCard"),
+                        resultSet.getString("FirstName"),
+                        resultSet.getString("CardGender"),
+                        resultSet.getString("CardAge"),
+                        resultSet.getString("Preamble"),
+                        resultSet.getString("GiftDescription"),
+                        resultSet.getString("Gift2Description")
+                		);
+ 
+                pstmt.close();
+ 
+                return (Item) entity;
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+ 
+            try {
+                if(null != stmt) {
+                    stmt.close();
+                }
+                if(null != conn) {
+                    conn.close();
+                }
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
+        }
+ 
+        return null;
+    }
+    
+    
+    
     public Boolean update(int id) {
         try {
             String updateQuery =

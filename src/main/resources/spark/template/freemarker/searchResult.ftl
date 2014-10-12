@@ -18,7 +18,7 @@ WishCardID: <input type="text" name="WCID">
  		<#list records as record>
 			<tr>
  				<td>${record.getWishCardID()}</td>
-  				<td>${record.getFirstName()}</td>
+  				<td><a href="/print/${record.getWishCardID()}">${record.getFirstName()}</a></td>
   				<td>${record.getCardGender()}</td>
   				<td>${record.getCardAge()}</td>
   				<td>${record.getPreamble()}</td>
