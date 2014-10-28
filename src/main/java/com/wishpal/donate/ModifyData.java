@@ -1,5 +1,7 @@
 package com.wishpal.donate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,37 +19,44 @@ public class ModifyData {
  
     public ModifyData() {
         // The account names setup from the command line interface
-        String user = "root";
-        String passwd = "root";
-        String dbName = "WishPalDB";
-        // DB connection on localhost via JDBC
-        String uri = "jdbc:mysql://localhost:8889/" + dbName;
+//        String user = "root";
+//        String passwd = "root";
+//        String dbName = "WishPalDB";
+//        // DB connection on localhost via JDBC
+//        String uri = "jdbc:mysql://localhost:8889/" + dbName;
  
  
         // Create the article table within sparkledb and close resources if an exception is thrown
         try {
-            conn = DriverManager.getConnection(uri, user, passwd);
-//            stmt = conn.createStatement();
+            conn = getConnection(); //DriverManager.getConnection(uri, user, passwd);
          
             System.out.println("Connecting to MySQL database");
         } catch(Exception e) {
             System.out.println(e.getMessage());
  
             try {
-                if(null != stmt) {
+                if(stmt != null) {
                     stmt.close();
                 }
-                if(null != conn) {
+                if(conn != null) {
                     conn.close();
                 }
             } catch (SQLException sqlException) {
                 sqlException.printStackTrace();
             }
         }
-    
- 
     }
-    
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        URI dbUri = new URI(System.getenv("HEROKU_POSTGRESQL_AQUA_URL"));
+        System.out.println(dbUri.getHost() + " ++ "  + dbUri.getPort() );
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
+    }
+
     
     public List<Item> readAll(int id) {
         try {

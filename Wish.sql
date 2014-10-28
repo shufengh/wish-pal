@@ -26,24 +26,25 @@ SET time_zone = "+00:00";
 -- Table structure for table `Wish`
 --
 
-CREATE TABLE `Wish` (
-  `WishCard` int(100) NOT NULL,
-  `AgencyCode` varchar(50) DEFAULT NULL,
-  `AgencyZone` varchar(100) DEFAULT NULL,
-  `AgencyChildID` int(50) DEFAULT NULL,
-  `FirstName` varchar(50) DEFAULT NULL,
-  `CardGender` varchar(50) DEFAULT NULL,
-  `CardAge` varchar(50) DEFAULT NULL,
-  `SpecialNeed` varchar(50) DEFAULT NULL,
-  `Preamble` varchar(50) DEFAULT NULL,
-  `GiftID` int(50) DEFAULT NULL,
-  `GiftDescription` varchar(50) DEFAULT NULL,
-  `GiftAttribute1` varchar(50) DEFAULT NULL,
-  `ReceiptNotice` varchar(50) DEFAULT NULL,
-  `Gift2Description` varchar(50) DEFAULT NULL,
-  `Status` int(1) NOT NULL,
-  PRIMARY KEY (`WishCard`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE  Wish  (
+   WishCard  int NOT NULL,
+   AgencyCode  varchar(50) DEFAULT NULL,
+   AgencyZone  varchar(100) DEFAULT NULL,
+   AgencyChildID  int DEFAULT NULL,
+   FirstName  varchar(50) DEFAULT NULL,
+   CardGender  varchar(50) DEFAULT NULL,
+   CardAge  varchar(50) DEFAULT NULL,
+   SpecialNeed  varchar(50) DEFAULT NULL,
+   Preamble  varchar(50) DEFAULT NULL,
+   GiftID  int DEFAULT NULL,
+   GiftDescription  varchar(50) DEFAULT NULL,
+   GiftAttribute1  varchar(50) DEFAULT NULL,
+   ReceiptNotice  varchar(50) DEFAULT NULL,
+   Gift2Description  varchar(50) DEFAULT NULL,
+   Status  int NOT NULL,
+  PRIMARY KEY ( WishCard )
+);
+ ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Wish`

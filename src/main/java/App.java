@@ -33,8 +33,7 @@ public class App {
 
 		String domainName = System.getenv("DOMAIN_NAME");
 		if (domainName == null) DOMAIN_NAME = "http://wishpal.herokuapp.com";
-		//else DOMAIN_NAME = "http://127.0.0.1:4567";
-		else DOMAIN_NAME = "http://192.168.86.243:4567";
+		else DOMAIN_NAME = "http://127.0.0.1:4567";
 	}
 	
 	public static void main(String[] args) {
@@ -46,20 +45,11 @@ public class App {
 		get(new FreeMarkerRoute("/") {
 			@Override
 			public Object handle(Request request, Response response) {
-//				Map<String, Object> viewObjects = new HashMap<String, Object>();
-//				viewObjects.put("templateName", "wishItem.ftl");
-//				viewObjects.put("imgPath", "");
-//
-//				return modelAndView(viewObjects, "index.ftl");
 				 List<Item> itemList = new ArrayList<Item>();
 	                itemList = o.readAll(0);
-//	              
 	                Map<String, Object> viewObjects = new HashMap<String, Object>();
 
 	                viewObjects.put("records", itemList);
-	                
-	                
-
 
 	                return modelAndView(viewObjects, "board_pic.ftl");
 			}
